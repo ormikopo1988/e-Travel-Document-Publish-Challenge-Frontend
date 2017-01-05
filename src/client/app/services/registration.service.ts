@@ -12,8 +12,6 @@ export class RegistrationService {
     registerUser(username: string, name: string, password: string, confirmPassword: string) {
         
         let registerURL = CONFIGURATION.azureUrls.authServer+'api/account/register';
-        //let registerURL = 'http://viva5authserver.azurewebsites.net/api/account/register';
-        //let registerURL = 'http://localhost:56478/api/account/register';
         
         let headers = new Headers({
             'Accept': 'application/json', 
