@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Upload New Document
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="Javascript:void(0)" routerLink="/dashboard/home"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Upload New Document
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form name="form" (ngSubmit)="uploadDocument()" role="form" #createDocumentForm="ngForm" novalidate>
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="File">Choose .txt file (*)</label>
+                        <input type="file" (change)="fileChange($event)" 
+                            class="btn btn-default"
+                            accept=".txt"
+                            name="File" id="File"
+                            required (change)="fileChange($event)" />
+                    </div>
+                    <br/><br/>
+                    <div class="form-group" [ngClass]="{ 'has-error': createDocumentForm.submitted && !Name.valid }">
+                        <label for="Name">Document Name (*)</label>
+                        <input type="text" class="form-control input-underline input-lg"
+                            name="Name" id="Name" required [(ngModel)]="newAttachment.Name"
+                            #Name="ngModel"/>
+                    </div>
+                    <br/><br/>
+                    <div class="form-group" [ngClass]="{ 'has-error': createDocumentForm.submitted && !OrderNo.valid }">
+                        <label for="OrderNo">Order (*)</label>
+                        <input type="number" class="form-control input-underline input-lg"
+                            name="OrderNo" id="OrderNo" required [(ngModel)]="newAttachment.OrderNo"
+                            #OrderNo="ngModel" min="1"/>
+                    </div>
+                    <br/><br/>
+                    <div class="form-group">
+                        <label for="Caption">Caption</label>
+                        <input type="text" class="form-control input-underline input-lg"
+                            name="Caption" id="Caption" [(ngModel)]="newAttachment.Caption"
+                            #Caption="ngModel"/>
+                    </div>
+                </div>
+				<br/>
+                <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!createDocumentForm.form.valid || !fileSelected">Upload Document</button>
+				<span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Uploading Document...
+				</span>
+                
+            </form>
+
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

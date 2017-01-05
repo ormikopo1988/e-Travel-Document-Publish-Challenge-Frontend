@@ -1,0 +1,72 @@
+<div class="login-page">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+        	<img src="assets/img/SB-admin.png" width="150px;" class="user-avatar" />
+			<h1>e-Travel Registration</h1>
+			
+			<form name="form" (ngSubmit)="registerUser()" role="form" #registerUserForm="ngForm" novalidate>
+				<div class="form-content">
+					
+					<div class="form-group" [ngClass]="{ 'has-error': registerUserForm.submitted && !username.valid }">
+						<label for="username">EMAIL</label>
+						<input type="text" class="form-control input-underline input-lg" 
+							name="username" id="username" placeholder="Enter your email address..."
+							required [(ngModel)]="user.username"
+							#username="ngModel">
+						<div [hidden]="username.valid || username.pristine" class="error">
+							Email is required my good sir/lady!
+						</div>
+					</div>
+
+					<div class="form-group" [ngClass]="{ 'has-error': registerUserForm.submitted && !name.valid }">
+						<label for="name">FULL NAME</label>
+						<input type="text" class="form-control input-underline input-lg" 
+							name="name" id="name" placeholder="Enter your full name..."
+							required [(ngModel)]="user.name"
+							#name="ngModel">
+						<div [hidden]="name.valid || name.pristine" class="error">
+							Full name is required my good sir/lady!
+						</div>
+					</div>
+
+					<div class="form-group" [ngClass]="{ 'has-error': registerUserForm.submitted && !password.valid }">
+						<label for="password">PASSWORD</label>
+						<input type="password" class="form-control input-underline input-lg" 
+							name="password" id="password" placeholder="Enter your desired password..."
+							required [(ngModel)]="user.password"
+							#password="ngModel">
+						<div [hidden]="password.valid || password.pristine" class="error">
+							Password is required my good sir/lady!
+						</div>
+					</div>
+					<div class="form-group" [ngClass]="{ 'has-error': registerUserForm.submitted && !repeatPassword.valid }">
+						<label for="repeatPassword">REPEAT PASSWORD</label>
+						<input type="password" class="form-control input-underline input-lg" 
+							name="repeatPassword" id="repeatPassword" placeholder="Repeat your desired password..."
+							required [(ngModel)]="user.repeatPassword"
+							#repeatPassword="ngModel">
+						<div [hidden]="repeatPassword.valid || repeatPassword.pristine" class="error">
+							Repeat password is required my good sir/lady!
+						</div>
+					</div>
+					
+				</div>
+				
+				<button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!registerUserForm.form.valid"><i class="fa fa-user-plus"></i> Register</button>
+				<span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Registering you to e-Travel Document Publish Challenge...
+				</span>
+				
+				<br/><br/>
+				
+				<alert></alert>
+				
+				<br/>
+				
+				<a type="submit" class="btn btn-primary" routerLink="/login"><i class="fa fa-sign-in"></i> Go to login page </a>
+			
+			</form>
+			
+		</div>	
+	</div>
+</div>
