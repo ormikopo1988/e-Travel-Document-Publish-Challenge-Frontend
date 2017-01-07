@@ -51,7 +51,7 @@ export class UserService {
     getCurrentUserInfo() {
         let url = CONFIGURATION.azureUrls.webApi+'api/users/getCurrentUserInfo';
 
-        let options = this.jwt();
+        let options = CONFIGURATION.jwt();
 
         return this.http.get(url, options)
             .map((response: Response) => response.json())
@@ -109,7 +109,7 @@ export class UserService {
     updateUser(user: GenericUser) {
         let editUserURL = CONFIGURATION.azureUrls.webApi+'api/users/';
 
-        let options = this.jwt();
+        let options = CONFIGURATION.jwt();
 
         let putRequestBody = JSON.stringify(user);
 
@@ -119,26 +119,6 @@ export class UserService {
                 console.log('CATCH: ', res.json());
                 throw (res.json());
             });
-    }
-
-    private jwt() {
-        // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-        if (currentUser && currentUser.user.access_token) {
-
-            let headers = new Headers({
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + currentUser.user.access_token
-            });
-
-            return new RequestOptions({ headers: headers });
-        }
-
-        else {
-            return new RequestOptions({});
-        }
     }
 
 }

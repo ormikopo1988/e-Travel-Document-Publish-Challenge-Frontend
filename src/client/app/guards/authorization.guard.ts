@@ -25,7 +25,7 @@ export class AuthorizationGuard {
         
         let url = CONFIGURATION.azureUrls.webApi+'api/attachments/'+attachmentId+'/isCurrentUserAttachmentCreator';
         
-        let options = this.jwt();
+        let options = CONFIGURATION.jwt();
         
         return this.http.get(url, options)
                         .map((response: Response) => response.json())
@@ -35,26 +35,4 @@ export class AuthorizationGuard {
                         });
     }
 	
-	// private helper methods
- 
-    private jwt() {
-        // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        
-        if (currentUser && currentUser.user.access_token) {
-            
-            let headers = new Headers({
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + currentUser.user.access_token
-            });
-            
-            return new RequestOptions({ headers: headers });
-        } 
-        
-        else {
-            return new RequestOptions({});
-        }
-    }
-    
 }

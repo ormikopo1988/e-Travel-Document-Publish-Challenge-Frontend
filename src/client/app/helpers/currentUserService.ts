@@ -14,7 +14,7 @@ export class CurrentUserService {
         
         let userURL = CONFIGURATION.azureUrls.webApi+'api/users/findByUsername';
         
-        let options = this.jwt();
+        let options = CONFIGURATION.jwt();
         
         let username = JSON.parse(localStorage.getItem('currentUser')).username;
         
@@ -30,26 +30,4 @@ export class CurrentUserService {
             });
     }
     
-    // private helper methods
- 
-    private jwt() {
-        // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        
-        if (currentUser && currentUser.user.access_token) {
-            
-            let headers = new Headers({
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + currentUser.user.access_token
-            });
-            
-            return new RequestOptions({ headers: headers });
-        } 
-        
-        else {
-            return new RequestOptions({});
-        }
-    }
- 
 }
