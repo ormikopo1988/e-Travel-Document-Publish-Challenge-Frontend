@@ -63,7 +63,11 @@ export class SignupComponent {
                         });
                     }
                     
-                    this.alertService.error(errorString);
+                    if(errorString !== "")
+                        this.alertService.error(errorString);
+                    else 
+                        this.alertService.error("This email has already been registered. Please try again with a different one!");
+                    
                     this.loading = false;
                 });
                 
