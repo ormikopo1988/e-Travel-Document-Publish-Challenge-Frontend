@@ -1,17 +1,18 @@
 import { Headers, RequestOptions } from '@angular/http';
 
 export let CONFIGURATION = {
-    azureUrls: {
+    /*azureUrls: {
         authServer: 'http://etravelauthserver.azurewebsites.net/',
         webApp: 'http://etravelwebapp.azurewebsites.net/',
         webApi: 'http://etravelwebapi.azurewebsites.net/'
     },
+    */
     
-    /*localUrls: {
+    azureUrls: {
         authServer: 'http://localhost:56478/',
         webApp: 'http://localhost:5555/',
         webApi: 'http://localhost:56378/'
-    },*/
+    },
     
     jwt: function() {
         // create authorization header with jwt token
